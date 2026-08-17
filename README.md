@@ -115,6 +115,19 @@ context** and not to guess or use external knowledge.
 The application displays the PDF page numbers and retrieved text
 used to generate the answer.
 
+##Screenshots
+ ###main interface
+ ![Main Interface](screenshots/main.png)
+
+ ### PDF Question Answering
+
+![Question Answering](screenshots/answer.png)
+
+### Source Citations
+
+![Source Citations](screenshots/source.png)
+
+
 ## ⚙️ Installation
 
 ### 1. Clone the repository
