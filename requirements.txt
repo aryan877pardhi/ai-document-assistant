@@ -7,3 +7,4 @@ langchain-huggingface
 faiss-cpu
 sentence-transformers
 pypdf
+reportlab
