@@ -140,8 +140,170 @@ def create_pdf_report(comparison, filenames):
     return buffer.getvalue()
 
 
-st.title("📄 AI Document Assistant")
-st.caption("Chat with your PDF using AI-powered semantic search and RAG.")
+
+st.markdown("""
+<style>
+
+/* ===== MAIN BACKGROUND ===== */
+.stApp {
+    background:
+        radial-gradient(circle at 10% 10%, rgba(220, 25, 65, 0.22), transparent 30%),
+        radial-gradient(circle at 90% 15%, rgba(90, 65, 220, 0.25), transparent 32%),
+        radial-gradient(circle at 50% 100%, rgba(30, 100, 230, 0.18), transparent 40%),
+        #090b14;
+    color: #ffffff;
+}
+
+/* ===== SIDEBAR ===== */
+[data-testid="stSidebar"] {
+    background: linear-gradient(
+        160deg,
+        #210d1b,
+        #11152c 55%,
+        #0b1020
+    );
+    border-right: 1px solid rgba(150, 100, 255, 0.3);
+}
+
+/* ===== MAIN CONTENT ===== */
+.block-container {
+    max-width: 1200px;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+}
+
+/* ===== HEADINGS ===== */
+h1, h2, h3 {
+    color: #ffffff !important;
+    font-weight: 750 !important;
+}
+
+p, label {
+    color: #d4d5e8;
+}
+
+/* ===== GLOSSY HERO SECTION ===== */
+.hero-panel {
+    padding: 35px;
+    margin-bottom: 30px;
+    border-radius: 24px;
+    background: linear-gradient(
+        115deg,
+        #79152f 0%,
+        #243e99 52%,
+        #642b9b 100%
+    );
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow:
+        0 15px 45px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.25);
+}
+
+.hero-kicker {
+    color: #e8dfff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.hero-title {
+    color: white;
+    font-size: 38px;
+    font-weight: 850;
+    margin: 10px 0;
+    text-shadow: 0 3px 15px rgba(0,0,0,0.3);
+}
+
+.hero-subtitle {
+    color: #e6e8ff;
+    font-size: 16px;
+}
+
+/* ===== UPLOAD AND FORM PANELS ===== */
+div[data-testid="stFileUploader"],
+div[data-testid="stExpander"],
+div[data-testid="stForm"] {
+    background: linear-gradient(
+        145deg,
+        rgba(30, 31, 55, 0.95),
+        rgba(15, 19, 37, 0.95)
+    );
+    border: 1px solid rgba(125, 110, 220, 0.35);
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+/* ===== INPUT BOX ===== */
+div[data-testid="stTextInput"] input {
+    background: #101426;
+    color: white;
+    border: 1px solid #5265c9;
+    border-radius: 12px;
+}
+
+div[data-testid="stTextInput"] input:focus {
+    border-color: #a78bfa;
+    box-shadow: 0 0 10px rgba(139,92,246,0.4);
+}
+
+/* ===== GLOSSY BUTTONS ===== */
+.stButton > button,
+.stDownloadButton > button,
+div[data-testid="stFormSubmitButton"] > button {
+    color: white;
+    font-weight: 700;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 12px;
+    background: linear-gradient(
+        105deg,
+        #a51e48,
+        #315bd8 52%,
+        #7138b8
+    );
+    box-shadow:
+        0 7px 22px rgba(75,65,190,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+    transition: all 0.2s ease;
+}
+
+.stButton > button:hover,
+.stDownloadButton > button:hover,
+div[data-testid="stFormSubmitButton"] > button:hover {
+    transform: translateY(-2px);
+    border-color: white;
+    box-shadow: 0 10px 30px rgba(110,75,220,0.45);
+}
+
+/* ===== MODE SELECTOR ===== */
+div[role="radiogroup"] label {
+    background: rgba(35, 38, 65, 0.85);
+    border: 1px solid rgba(130,120,220,0.35);
+    border-radius: 12px;
+    padding: 9px 14px;
+}
+
+/* ===== ALERTS ===== */
+[data-testid="stAlert"] {
+    border-radius: 14px;
+}
+
+/* ===== DIVIDERS ===== */
+hr {
+    border-color: rgba(145,130,210,0.25);
+}
+
+</style>
+
+<div class="hero-panel">
+    <div class="hero-kicker">AI-Powered Document Workspace</div>
+    <div class="hero-title">📄 AI Document Assistant</div>
+    <div class="hero-subtitle">
+        Chat with PDFs • Discover Insights • Compare Documents
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
 
 #CHAT HISTORY 
 if "chat_history" not in st.session_state:
